@@ -56,7 +56,7 @@ public class TelevisionTest {
   }
 
   @Test
-  public void TestCompareTo() {
+  public void testCompareTo() {
     Television tv2 = new Television("Vizio");
     assertTrue(tv1.compareTo(tv2) < 0);
     Television tv3 = new Television("LG");
@@ -65,15 +65,15 @@ public class TelevisionTest {
 
   @Test
   public void testHashCode() {
-    Television tv2 = new Television("Samsung", 0, DisplayType.OLED);
+    Television tv2 = new Television("Sony", 50, DisplayType.LED);
     assertEquals(tv1.hashCode(), tv2.hashCode());
-    Television tv3 = new Television("Samsung", 1, DisplayType.OLED);
-    assertEquals(tv1.hashCode(), tv3.hashCode());
+    Television tv3 = new Television("Sony", 50, DisplayType.OLED);
+    assertNotEquals(tv1.hashCode(), tv3.hashCode());
   }
 
   @Test
   public void testEquals() {
-    Television tv2 = new Television("Samsung", 0, DisplayType.OLED);
+    Television tv2 = new Television("Sony", 50, DisplayType.LED);
     assertEquals(tv1, tv2);
     Television tv3 = new Television("Samsung", 0, DisplayType.LCD);
     assertNotEquals(tv1, tv3);
