@@ -37,7 +37,7 @@ public class CatalogStreamTest {
       .filter(item -> item.getArtist().startsWith("D"))
       .sorted(Comparator.comparing(item -> item.getPrice()))
       .collect(Collectors.toList());
-    
+
     assertEquals(2, items.size());
     assertEquals(Long.valueOf(11), items.get(0).getId());
     assertEquals(Long.valueOf(10), items.get(1).getId());
@@ -52,6 +52,11 @@ public class CatalogStreamTest {
   @Test
   public void testTitleEqualsArtistSortNaturalOrder() {
     // TODO
+    List<MusicItem> items = allMusicItems.stream()
+        .filter(item -> item.getArtist().equals(item.getTitle()))
+        .sorted()
+        .collect(Collectors.toList());
+    System.out.println(items);
   }
   
   /**
@@ -64,6 +69,11 @@ public class CatalogStreamTest {
   @Test
   public void testPriceLessThanSortMusicCategory() {
     // TODO
+    List<MusicItem> items = allMusicItems.stream()
+        .filter(item -> item.getPrice() < 12.00)
+        .sorted(Comparator.comparing(item -> item.getMusicCategory()))
+        .collect(Collectors.toList());
+    System.out.println(items);
   }
   
   /**
@@ -74,6 +84,11 @@ public class CatalogStreamTest {
   @Test
   public void testSortMusicCategorySortReleaseDateDesc() {
     // TODO
+    List<MusicItem> items = allMusicItems.stream()
+        .filter(item -> item.getMusicCategory() == MusicCategory.ROCK && item.getPrice() < 15.00)
+        .sorted(Comparator.comparing(MusicItem::getReleaseDate))
+        .collect(Collectors.toList());
+    System.out.println(items);
   }
   
   /**
@@ -85,6 +100,11 @@ public class CatalogStreamTest {
   @Test
   public void testPriceGreaterThanSortPriceDescThenMusicCategory() {
     // TODO
+    List<MusicItem> items = allMusicItems.stream()
+        .filter(item -> item.getPrice() > 17.00)
+        .sorted(Comparator.comparing(MusicItem::getPrice).reversed().thenComparing(MusicItem::getArtist))
+        .collect(Collectors.toList());
+    System.out.println(items);
   }
   
   /**
@@ -96,5 +116,10 @@ public class CatalogStreamTest {
   @Test
   public void testReleaseDateSortArtist() {
     // TODO
+    List<MusicItem> items = allMusicItems.stream()
+        .filter(item -> item.getReleaseDate().toString().startsWith("198") && item.getPrice() < 12.00)
+        .sorted(Comparator.comparing(MusicItem::getArtist))
+        .collect(Collectors.toList());
+    System.out.println(items);
   }
 }
